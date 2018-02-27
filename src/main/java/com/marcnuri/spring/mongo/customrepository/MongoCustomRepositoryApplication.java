@@ -8,7 +8,6 @@ package com.marcnuri.spring.mongo.customrepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 /**
  * Created by Marc Nuri <marc@marcnuri.com> on 2018-02-27.

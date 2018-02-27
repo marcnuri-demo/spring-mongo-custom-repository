@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface BookRepository extends MongoRepository<Book, String>, BookReposiotryCustom {
 
-	public List<Book> findByTitleContainingOrderByTitle(String titleContains);
+	List<Book> findByTitleContainingOrderByTitle(String titleContains);
 
 }

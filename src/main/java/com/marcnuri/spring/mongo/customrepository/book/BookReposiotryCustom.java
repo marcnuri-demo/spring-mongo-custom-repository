@@ -7,6 +7,6 @@ import java.util.List;
  */
 public interface BookReposiotryCustom {
 
-	public List<Book> query(DynamicQuery dynamicQuery);
+	List<Book> query(DynamicQuery dynamicQuery);
 
 }
