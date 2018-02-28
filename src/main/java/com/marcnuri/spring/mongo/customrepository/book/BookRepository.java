@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Marc Nuri <marc@marcnuri.com> on 2018-02-27.
  */
-public interface BookRepository extends MongoRepository<Book, String>, BookReposiotryCustom {
+public interface BookRepository extends MongoRepository<Book, String>, BookRepositoryCustom {
 
 	List<Book> findByTitleContainingOrderByTitle(String titleContains);
 

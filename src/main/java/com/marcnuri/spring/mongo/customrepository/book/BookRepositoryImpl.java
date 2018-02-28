@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Marc Nuri <marc@marcnuri.com> on 2018-02-27.
  */
-public class BookRepositoryCustomImpl implements BookReposiotryCustom {
+public class BookRepositoryImpl implements BookRepositoryCustom {
 
 //**************************************************************************************************
 //  Fields
@@ -24,7 +24,7 @@ public class BookRepositoryCustomImpl implements BookReposiotryCustom {
 //  Constructors
 //**************************************************************************************************
 	@Autowired
-	public BookRepositoryCustomImpl(MongoTemplate mongoTemplate) {
+	public BookRepositoryImpl(MongoTemplate mongoTemplate) {
 		this.mongoTemplate = mongoTemplate;
 	}
 
