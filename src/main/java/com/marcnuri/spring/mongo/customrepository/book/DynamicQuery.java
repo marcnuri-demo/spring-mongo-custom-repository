@@ -38,6 +38,29 @@ public class DynamicQuery {
 //**************************************************************************************************
 //  Getter/Setter Methods
 //**************************************************************************************************
+	public String getAuthorLike() {
+		return authorLike;
+	}
+
+	public void setAuthorLike(String authorLike) {
+		this.authorLike = authorLike;
+	}
+
+	public Date getPublishDateBefore() {
+		return publishDateBefore;
+	}
+
+	public void setPublishDateBefore(Date publishDateBefore) {
+		this.publishDateBefore = publishDateBefore;
+	}
+
+	public Date getPublishDateAfter() {
+		return publishDateAfter;
+	}
+
+	public void setPublishDateAfter(Date publishDateAfter) {
+		this.publishDateAfter = publishDateAfter;
+	}
 
 //**************************************************************************************************
 //  Static Methods
