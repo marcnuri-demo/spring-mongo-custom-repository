@@ -7,9 +7,84 @@
     ],
     "publishDate":"1218412800000",
     "subjects":[
+      "Computer Programming",
+      "Software Engineering",
       "Programming Methodology",
       "Quality Control & Testing - Programming",
       "General Software Engineering"
+    ]
+  },
+  {
+    "title":"Coders at Work",
+    "isbn":"1430219483",
+    "authorNames":[
+      "Peter Seibel"
+    ],
+    "publishDate":"1253059200000",
+    "subjects":[
+      "Computer Programming",
+      "Software Engineering"
+    ]
+  },
+  {
+    "title":"The mythical man-month and other essays on software engineering",
+    "isbn":"8178082535",
+    "authorNames":[
+      "Frederick P Brooks"
+    ],
+    "publishDate":"126230400000",
+    "subjects":[
+      "Software Engineering"
+    ]
+  },
+  {
+    "title":"Code Complete",
+    "isbn":"0735619670",
+    "authorNames":[
+      "Steve McConnell"
+    ],
+    "publishDate":"1087603200000",
+    "subjects":[
+      "Software Engineering"
+    ]
+  },
+  {
+    "title":"The Pragmatic Programmer: From Journeyman to Master",
+    "isbn":"020161622X",
+    "authorNames":[
+      "Andrew Hunt",
+      "David Thomas"
+    ],
+    "publishDate":"941241600000",
+    "subjects":[
+      "Computer Programming",
+      "Software Engineering"
+    ]
+  },
+  {
+    "title":"Cracking the Coding Interview",
+    "isbn":"098478280X",
+    "authorNames":[
+      "Gayle Laakmann McDowell"
+    ],
+    "publishDate":"1313971200000",
+    "subjects":[
+      "Computer Programming",
+      "Software Engineering",
+      "Job Hunting"
+    ]
+  },
+  {
+    "title":"Soft Skills: The software developer's life manual",
+    "isbn":"1617292397",
+    "authorNames":[
+      "John Sonmez"
+    ],
+    "publishDate":"1419811200000",
+    "subjects":[
+      "Software Engineering",
+      "Business & Economics",
+      "Self Help"
     ]
   }
 ]

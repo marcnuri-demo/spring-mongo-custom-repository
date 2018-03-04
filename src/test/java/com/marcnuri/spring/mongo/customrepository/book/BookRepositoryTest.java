@@ -51,6 +51,30 @@ public class BookRepositoryTest {
 
 		bookRepository.deleteAll();
 
+		loadDefaultBooks();
+
+	}
+
+//**************************************************************************************************
+//  Constructors
+//**************************************************************************************************
+	@Test
+	public void findByTitleContainingOrderByTitle_existingTitle_shouldReturnList() {
+		// Given
+		// DB with default books
+		final String existingBookPartialTitle = "lean Code";
+
+		// When
+		final List<Book> books = bookRepository.findByTitleContainingOrderByTitle(existingBookPartialTitle);
+
+		// Then
+		final int expectedCount = 1;
+		Assert.assertEquals(expectedCount, books.size());
+		Assert.assertEquals(books.size(), books.stream().filter(
+				b -> b.getTitle().contains(existingBookPartialTitle)).count());
+	}
+
+	private void loadDefaultBooks() {
 		final StringBuilder jsonDocument = new StringBuilder();
 		try (BufferedReader br = new BufferedReader(
 				new InputStreamReader(BookRepositoryTest.class.getResourceAsStream(DEFAULT_BOOKS_JSON)))) {
@@ -64,26 +88,5 @@ public class BookRepositoryTest {
 		} catch (IOException ex) {
 			log.error("Error loading JSON", ex);
 		}
-
 	}
-
-//**************************************************************************************************
-//  Constructors
-//**************************************************************************************************
-	@Test
-	public void findByTitleContainingOrderByTitle_existingTitle_shouldReturnList() {
-		// Given
-		final String existingBookPartialTitle = "lean Code";
-
-		// When
-		final List<Book> books = bookRepository.findByTitleContainingOrderByTitle(existingBookPartialTitle);
-
-		// Then
-		final int expectedCount = 1;
-		Assert.assertEquals(expectedCount, books.size());
-		Assert.assertEquals(books.size(), books.stream().filter(
-				b -> b.getTitle().contains(existingBookPartialTitle)).count());
-	}
-
-
 }
