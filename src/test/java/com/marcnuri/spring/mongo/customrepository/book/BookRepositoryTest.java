@@ -23,6 +23,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -74,6 +77,66 @@ public class BookRepositoryTest {
 				b -> b.getTitle().contains(existingBookPartialTitle)).count());
 	}
 
+	@Test
+	public void findByTitleContainingOrderByTitle_nonExistingTitle_shouldReturnEmpty() {
+		// Given
+		// DB with default books
+		final String nonExistingBookPartialTitle = "This is the way society functions. Aren't you a part of society?";
+
+		// When
+		final List<Book> books = bookRepository.findByTitleContainingOrderByTitle(nonExistingBookPartialTitle);
+
+		// Then
+		Assert.assertTrue(books.isEmpty());
+	}
+
+	@Test
+	public void query_author_shouldReturnList() {
+		// Given
+		// DB with default books
+		final String existingAuthor = "DaViD THoMA";
+		final DynamicQuery dynamicQuery = new DynamicQuery();
+		dynamicQuery.setAuthorNameLike(existingAuthor);
+
+		// When
+		final List<Book> books = bookRepository.query(dynamicQuery);
+
+		// Then
+		final int expectedCount = 1;
+		Assert.assertEquals(expectedCount, books.size());
+	}
+
+	@Test
+	public void query_badAuthor_shouldReturnEmptyList() {
+		// Given
+		// DB with default books
+		final String nonExistingAuthorInjectdd = "DaV?D T*oMA";
+		final DynamicQuery dynamicQuery = new DynamicQuery();
+		dynamicQuery.setAuthorNameLike(nonExistingAuthorInjectdd);
+
+		// When
+		final List<Book> books = bookRepository.query(dynamicQuery);
+
+		// Then
+		Assert.assertTrue(books.isEmpty());
+	}
+
+	@Test
+	public void query_publishDateBefore_shouldReturnList() {
+		// Given
+		// DB with default books
+		final Date ancientDate = Date.from(LocalDate.of(1985, 10, 26)
+				.atStartOfDay().atZone(ZoneId.of("GMT")).toInstant());
+		final DynamicQuery dynamicQuery = new DynamicQuery();
+		dynamicQuery.setPublishDateBefore(ancientDate);
+
+		// When
+		final List<Book> books = bookRepository.query(dynamicQuery);
+
+		// Then
+		final int expectedCount = 1;
+		Assert.assertEquals(expectedCount, books.size());
+	}
 	private void loadDefaultBooks() {
 		final StringBuilder jsonDocument = new StringBuilder();
 		try (BufferedReader br = new BufferedReader(

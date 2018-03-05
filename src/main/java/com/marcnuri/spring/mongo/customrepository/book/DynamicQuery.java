@@ -15,7 +15,7 @@ public class DynamicQuery {
 //**************************************************************************************************
 //  Fields
 //**************************************************************************************************
-	private String authorLike;
+	private String authorNameLike;
 	private Date publishDateBefore;
 	private Date publishDateAfter;
 
@@ -38,12 +38,12 @@ public class DynamicQuery {
 //**************************************************************************************************
 //  Getter/Setter Methods
 //**************************************************************************************************
-	public String getAuthorLike() {
-		return authorLike;
+	public String getAuthorNameLike() {
+		return authorNameLike;
 	}
 
-	public void setAuthorLike(String authorLike) {
-		this.authorLike = authorLike;
+	public void setAuthorNameLike(String authorNameLike) {
+		this.authorNameLike = authorNameLike;
 	}
 
 	public Date getPublishDateBefore() {

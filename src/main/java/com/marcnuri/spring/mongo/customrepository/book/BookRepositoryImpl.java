@@ -44,12 +44,17 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 	public List<Book> query(DynamicQuery dynamicQuery) {
 		final Query query = new Query();
 		final List<Criteria> criteria = new ArrayList<>();
-		if(dynamicQuery.getAuthorLike() != null) {
-			criteria.add(Criteria.where("author").regex(MongoRegexCreator.INSTANCE.toRegularExpression(
-					dynamicQuery.getAuthorLike(), Part.Type.CONTAINING
+		if(dynamicQuery.getAuthorNameLike() != null) {
+			criteria.add(Criteria.where("authorNames").regex(MongoRegexCreator.INSTANCE.toRegularExpression(
+					dynamicQuery.getAuthorNameLike(), Part.Type.CONTAINING
 			), "i"));
 		}
-		query.addCriteria(new Criteria().andOperator(criteria.toArray(new Criteria[criteria.size()])));
+		if(dynamicQuery.getPublishDateBefore() != null) {
+			criteria.add(Criteria.where("publishDate").lt(dynamicQuery.getPublishDateBefore()));
+		}
+		if(!criteria.isEmpty()) {
+			query.addCriteria(new Criteria().andOperator(criteria.toArray(new Criteria[criteria.size()])));
+		}
 		return mongoTemplate.find(query, Book.class);
 	}
 
