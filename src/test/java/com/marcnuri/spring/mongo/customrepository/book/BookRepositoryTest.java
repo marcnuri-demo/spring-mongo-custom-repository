@@ -24,6 +24,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
@@ -40,6 +41,7 @@ import java.util.List;
 public class BookRepositoryTest {
 
 	private static final String DEFAULT_BOOKS_JSON = "/books.json";
+	private static final String GMT_ZONE_ID = "GMT";
 
 	private static final Logger log = LoggerFactory.getLogger(BookRepositoryTest.class);
 
@@ -126,7 +128,7 @@ public class BookRepositoryTest {
 		// Given
 		// DB with default books
 		final Date ancientDate = Date.from(LocalDate.of(1985, 10, 26)
-				.atStartOfDay().atZone(ZoneId.of("GMT")).toInstant());
+				.atStartOfDay().atZone(ZoneId.of(GMT_ZONE_ID)).toInstant());
 		final DynamicQuery dynamicQuery = new DynamicQuery();
 		dynamicQuery.setPublishDateBefore(ancientDate);
 
@@ -137,6 +139,79 @@ public class BookRepositoryTest {
 		final int expectedCount = 1;
 		Assert.assertEquals(expectedCount, books.size());
 	}
+
+	@Test
+	public void query_publishDateAfter_shouldReturnList() {
+		// Given
+		// DB with default books
+		final Date ancientDate = Date.from(LocalDate.of(1996, 01, 23)
+				.atStartOfDay().atZone(ZoneId.of(GMT_ZONE_ID)).toInstant());
+		final DynamicQuery dynamicQuery = new DynamicQuery();
+		dynamicQuery.setPublishDateAfter(ancientDate);
+
+		// When
+		final List<Book> books = bookRepository.query(dynamicQuery);
+
+		// Then
+		final int expectedCount = 6;
+		Assert.assertEquals(expectedCount, books.size());
+	}
+
+	@Test
+	public void query_subject_shouldReturnList() {
+		// Given
+		// DB with default books
+		final String existingSubject = "CompuTeR PrograMMing";
+		final DynamicQuery dynamicQuery = new DynamicQuery();
+		dynamicQuery.setSubject(existingSubject);
+
+		// When
+		final List<Book> books = bookRepository.query(dynamicQuery);
+
+		// Then
+		final int expectedCount = 4;
+		Assert.assertEquals(expectedCount, books.size());
+	}
+
+	@Test
+	public void query_badSubject_shouldReturnEmptyList() {
+		// Given
+		// DB with default books
+		final String existingSubject = "ompuTeR PrograMMing";
+		final DynamicQuery dynamicQuery = new DynamicQuery();
+		dynamicQuery.setSubject(existingSubject);
+
+		// When
+		final List<Book> books = bookRepository.query(dynamicQuery);
+
+		// Then
+		Assert.assertTrue(books.isEmpty());
+	}
+
+	@Test
+	public void query_combinedQuery_shouldReturnList() {
+		// Given
+		// DB with default books
+		final String authorName = "Laakmann McDow";
+		final Date dateAfter = Date.from(LocalDate.of(2011, 8, 22)
+				.atStartOfDay().atZone(ZoneId.of(GMT_ZONE_ID)).toInstant());
+		final Date dateBefore = Date.from(LocalDate.of(2011, 8, 22)
+				.atTime(LocalTime.MAX).atZone(ZoneId.of(GMT_ZONE_ID)).toInstant());
+		final String subject = "JOB HUNTING";
+		final DynamicQuery dynamicQuery = new DynamicQuery();
+		dynamicQuery.setAuthorNameLike(authorName);
+		dynamicQuery.setPublishDateAfter(dateAfter);
+		dynamicQuery.setPublishDateBefore(dateBefore);
+		dynamicQuery.setSubject(subject);
+
+		// When
+		final List<Book> books = bookRepository.query(dynamicQuery);
+
+		// Then
+		final int expectedCount = 1;
+		Assert.assertEquals(expectedCount, books.size());
+	}
+
 	private void loadDefaultBooks() {
 		final StringBuilder jsonDocument = new StringBuilder();
 		try (BufferedReader br = new BufferedReader(

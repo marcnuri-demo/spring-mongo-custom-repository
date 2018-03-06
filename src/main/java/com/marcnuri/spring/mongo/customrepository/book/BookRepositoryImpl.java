@@ -50,7 +50,15 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 			), "i"));
 		}
 		if(dynamicQuery.getPublishDateBefore() != null) {
-			criteria.add(Criteria.where("publishDate").lt(dynamicQuery.getPublishDateBefore()));
+			criteria.add(Criteria.where("publishDate").lte(dynamicQuery.getPublishDateBefore()));
+		}
+		if(dynamicQuery.getPublishDateAfter() != null) {
+			criteria.add(Criteria.where("publishDate").gte(dynamicQuery.getPublishDateAfter()));
+		}
+		if(dynamicQuery.getSubject() != null) {
+			criteria.add(Criteria.where("subjects").regex(MongoRegexCreator.INSTANCE.toRegularExpression(
+					dynamicQuery.getSubject(), Part.Type.SIMPLE_PROPERTY
+			), "i"));
 		}
 		if(!criteria.isEmpty()) {
 			query.addCriteria(new Criteria().andOperator(criteria.toArray(new Criteria[criteria.size()])));

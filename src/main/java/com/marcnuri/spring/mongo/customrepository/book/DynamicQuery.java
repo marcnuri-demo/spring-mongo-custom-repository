@@ -18,6 +18,7 @@ public class DynamicQuery {
 	private String authorNameLike;
 	private Date publishDateBefore;
 	private Date publishDateAfter;
+	private String subject;
 
 //**************************************************************************************************
 //  Constructors
@@ -62,6 +63,13 @@ public class DynamicQuery {
 		this.publishDateAfter = publishDateAfter;
 	}
 
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 //**************************************************************************************************
 //  Static Methods
 //**************************************************************************************************
