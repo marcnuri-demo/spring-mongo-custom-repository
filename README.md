@@ -1,5 +1,7 @@
 # Spring Data MongoDB: Custom repository implementation
 
+[![Build Status](https://travis-ci.org/marcnuri-demo/spring-mongo-custom-repository.svg?branch=master)](https://travis-ci.org/marcnuri-demo/spring-mongo-custom-repository)
+
 Source code for the tutorial published in
 https://blog.marcnuri.com/spring-data-mongodb-custom-repository-implementation/
 
